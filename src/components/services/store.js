@@ -1,93 +1,118 @@
-export default {
-  namespaced:true,
-    state:{
-      count:0,
-      currentPage:1,
-      eachpage:10,
-      maxPage:0,
-      tableData: [{
-      //   count:"",
-      //   currentPage:1,
-      //   eachpage:10,
-      //   maxPage:"",
-        shopName: '',
-        shopLicenceImg: '',
-        shopUserImg: '',
-        shopAdd: '',
-        shopLocation: '  ',
-        shopCorporate: "",
-        shopTel:"",
-        shopImg:"",
-        shopFeature:"",
-      }],
+
+export default ({
+    // 一种模式查
+    namespaced:true,
+    state: {
+        tableData4:[{
+            serviceName: "王小虎",
+            serviceType: "上海市普陀区金沙江路 1518 弄",
+            serviceSchedule: "1111111",
+            serviceDetial: "22222",
+            serviceTime: "44444",
+            serviceLevel: "3213213",
+            servicePrice: "222222",
+          _id:"",
+          row:[]
+        }]
     },
     mutations: {
-      assign(state, data) {
-       state.count=data.count
-       state.currentPage=data.currentPage
-       state.eachpage=data.eachpage
-       state.maxPage=data.maxPage
-       state.tableData = data.rows
-      //  console.log(state)
-      },
-    },
-    actions: {
-      async addShop(context,data1) {
-        // console.log(data1)
-         await fetch("/shop/addshop", {
-          method: "post",
-          body: JSON.stringify(data1),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }).then(res => res.json())
-        // console.log('in')
-        // context.commit('assign',data)
-        // console.log(data)
-      },
-      async getShop(context) {
-        const data = await fetch("/shop/getshop", {
-          method: "post",
-          body: JSON.stringify(),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }).then(res => res.json())
-        context.commit('assign',data)  
-      },
-      async delshop(context,id) {
-         await fetch("/shop/delshop", {
-          method: "post",
-          body: JSON.stringify({id}),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }).then()
-       
-      },
-      async changeshop(context,data) {
-        // console.log(data)
-        await fetch("/shop/changeshop", {
-         method: "post",
-         body: JSON.stringify(data),
-         headers: {
-           "Content-Type": "application/json"
-         }
-       }).then()
-      
-     },
-     async getShopByPage(context,data3) {
-      //  console.log(data3)
-      const data = await fetch("/shop/getShopByPage", {
-        method: "post",
-        body: JSON.stringify(data3),
-        headers: {
-          "Content-Type": "application/json"
+        assign(state,data){
+            Object.assign(state.tableData,data)
+        },
+        // 下一页
+        nextBtn(state){
+            if(state.data.curPage>state.data.maxPage){
+                state.data.curPage++;
+            }
+        },
+        // 上一页
+        preBtn(state){
+            if(state.data.curPage>1){
+                state.data.curPage--;
+            }
+        },
+        // 首页
+        firstBtn(state){
+            state.data.curPage=1;
+        },
+        // 尾页
+        wyBtn(state){
+            state.data.curPage=state.data.maxPage
+        },
+        assign1(state,data){
+            state.tableData4=data
         }
-      }).then(res => res.json())
-      // console.log(data)
-      context.commit('assign',data)  
     },
-   
-    }
-  }
+    
+    
+    actions:{
+        // 商品查询
+        async getFoods(context) {     
+        const data = await fetch("/goods/getFoods", {
+            method: "post",
+            body: JSON.stringify(),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(res => res.json());
+       context.commit("assign1",data)
+        
+            // console.log(data)
+         },
+
+         
+        //   // 商品查询
+        // async getFoods(context,state) {     
+        //     const data = await fetch("/goods/getFoods", {
+        //         method: "post",
+        //         body: JSON.stringify(),
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         }
+        //     }).then(res => res.json());
+        //     context.commit("assign",data)
+            
+        //     //    console.log(data)
+        //      },
+
+
+
+        //  添加食品
+        async addEmp(context,data1) {
+            
+             await fetch("/goods/addEmp", {
+                method: "post",
+                body: JSON.stringify(data1),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(res => res.json());
+            // context.commit("assign",data)
+             },
+
+//               //  添加用品
+//         async articalAdd(context,adata) {
+            
+//             await fetch("/goods/articalAdd", {
+//                method: "post",
+//                body: JSON.stringify(adata),
+//                headers: {
+//                    "Content-Type": "application/json"
+//                }
+//            }).then(res => res.json());
+//            // context.commit("assign",data)
+//             },
+
+//             //  删除
+//             async delet(context,data2) {
+//                  await fetch("/goods/delet", {
+//                     method: "post",
+//                     body: JSON.stringify(data2),
+//                     headers: {
+//                         "Content-Type": "application/json"
+//                     }
+//                 }).then(res => res.json());
+//                 // context.commit("assign",data)
+//                  },
+   }
+})

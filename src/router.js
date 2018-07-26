@@ -13,7 +13,7 @@ import Order from "./components/order/order.vue"
 import Pet from "./components/pet/pet.vue"
 import Foods from "./components/foods/foods.vue"
 import Artical from "./components/artical/artical.vue"
-// import Services from "./components/services/services.vue"
+import Services from "./components/services/services.vue"
 
 //这是平台管理
 import _Info from './components1/info/info.vue'
@@ -122,6 +122,10 @@ export default new Router({
         path: '/Info/Artical',
         name: 'Artical',
         component: Artical
+      },{
+        path: '/Info/Services',
+        name: 'Services',
+        component: Services
       }],
     }
   ]
