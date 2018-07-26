@@ -18,12 +18,16 @@ import _Order from "./components1/order/store.js"
 import Artical from "./components/artical/store.js"
 // 食品
 import Foods from "./components/foods/store.js"
+// 服务
+import order from './components/order/store.js'
+
 
 Vue.use(ElementUI);
 Vue.use(Vuex)
 export default new Vuex.Store({
     modules:{
         Info,
+        order,
         Pet,
         service,
         User,
