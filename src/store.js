@@ -8,7 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 import Info from "./components/info/store.js"
 import Pet from "./components/pet/store.js"
-import Service from "./components/service/store.js"
+import service from "./components/service/store.js"
 import User from "./components1/user/store.js"
 import _Clerk from "./components1/clerk/store.js"
 import _Pet from "./components1/shop/pet/store.js"
@@ -25,7 +25,7 @@ export default new Vuex.Store({
     modules:{
         Info,
         Pet,
-        Service,
+        service,
         User,
         _Clerk,
         _Pet,
