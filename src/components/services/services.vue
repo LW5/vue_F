@@ -160,7 +160,6 @@ export default {
   
    data() {
     return {
-  
       dialogTableVisible: false,
       dialogFormVisible: false,
        form: {

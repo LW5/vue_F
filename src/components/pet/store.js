@@ -9,7 +9,8 @@ export default {
             chongwuColor:"" ,    //宠物的颜色
             chongwuData:"",     //宠物的生日
             chongwuStyle:"", 
-            mendianGliId:localStorage.mendianGliId
+            mendianGliId:localStorage.mendianGliId,
+            userId:localStorage.userGlId
         },
             curPage: 1,
             eachPage: 10,
@@ -22,6 +23,7 @@ export default {
             console.log(index)
         },
         getPetData(state,petData){
+            console.log(petData)
             const { chongwuguanli,count } = petData
             state.chongwuguanli = chongwuguanli
             state.count = count

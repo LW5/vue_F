@@ -33,7 +33,7 @@ export default {
       },
       actions: {
         async addShop(context,data1) {
-          // console.log(data1)
+          console.log(data1.userId = localStorage.userGlId)
            await fetch("/shop/addshop", {
             method: "post",
             body: JSON.stringify(data1),
@@ -48,7 +48,7 @@ export default {
         async getShop(context) {
           const data = await fetch("/shop/getshop", {
             method: "post",
-            body: JSON.stringify(),
+            body: JSON.stringify({_id:localStorage.userGlId}),
             headers: {
               "Content-Type": "application/json"
             }
@@ -77,7 +77,8 @@ export default {
         
        },
        async getShopByPage(context,data3) {
-        //  console.log(data3)
+         console.log(data3)
+         data3._id = localStorage.userGlId
         const data = await fetch("/shop/getShopByPage", {
           method: "post",
           body: JSON.stringify(data3),
@@ -85,7 +86,7 @@ export default {
             "Content-Type": "application/json"
           }
         }).then(res => res.json())
-        // console.log(data)
+        console.log(data)
         context.commit('assign',data)  
       },
      

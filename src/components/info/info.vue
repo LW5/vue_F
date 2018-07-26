@@ -5,12 +5,10 @@
   <el-menu-item index="1">处理中心</el-menu-item>
    <el-menu-item index="4" disabled>2018-07-20</el-menu-item>
   <el-submenu index="2">
-    <template slot="title">管理</template>
-    <el-menu-item index="2-1">选项1</el-menu-item>
-    <el-menu-item index="2-2">选项2</el-menu-item>
-    <el-menu-item index="2-3">选项3</el-menu-item>
+    <template slot="title" >选择店铺</template>
+    <el-menu-item index="2-1"  v-for="item in this.mendianNum" :key="item"  @click="change_d(item-1)">店铺{{item}}</el-menu-item>
   </el-submenu>
-  <el-menu-item index="3" >{{userName}}!欢迎回来</el-menu-item>
+  <el-menu-item index="3">{{userName}}!欢迎回来</el-menu-item>
      <el-menu-item index="5">门店管理员</el-menu-item>
 </el-menu>
 <div class="line"></div>
@@ -74,6 +72,9 @@ export default {
     computed:{
       userName(){
           return this.$store.state.Info.userName
+      },
+      mendianNum(){
+        return this.$store.state.Info.mendianNum
       }
     }
     ,
@@ -92,7 +93,12 @@ export default {
                 const { userAcount,mendianguanliId } = data[0]
                 this.$store.state.Info.userName = userAcount
                 this.$store.state.Info.mendianGli = mendianguanliId
-      }
+                this.$store.state.Info.mendianNum = mendianguanliId.length
+      },
+        change_d(item){
+          console.log(item)
+           this.$store.state.Info.mendianGliIndex = item
+        }
     }  
 }
 </script>

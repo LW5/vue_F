@@ -220,9 +220,6 @@
 
 </el-dialog>
 
-
- 
-
   
   <div class="block">
     <el-pagination
@@ -264,11 +261,6 @@ export default {
          this.$store.dispatch("service/getShopByPage",data)
         // console.log(`当前页: ${val}`);
       },
-
-
-
-
-
 
     handleAvatarSuccess(res) {
       // console.log(res._id)
@@ -399,7 +391,6 @@ export default {
       }
       this.$store.dispatch("service/getShopByPage",data)
       // this.$store.dispatch("service/getShop");
-    
     }
   },
   created() {

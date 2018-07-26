@@ -92,97 +92,119 @@
 
 </template>
 <script>
-  export default {
-       created(){
-        if(!this.chongwuguanli[0]){
-          console.log("inini")
-          this.dialogFormVisible = true
-        }
-        let index = this.$store.state.Service.mendianIndex
-        if(this.$store.state.Info.mendianGli.length){
-             console.log("1")
-             const { chongwuguanliId,_id:mendianGliId } =  this.$store.state.Info.mendianGli[index]
-             localStorage.mendianGliId = mendianGliId
-        }
-        this.handeClick_Get()
-      },
-       computed:{
-        chongwuguanli(){
-                return this.$store.state.Pet.chongwuguanli
-            },
-        form(){
-                return this.$store.state.Pet.form
-            },
-         maxPage(){ 
-                return this.$store.state.Pet.maxPage
-                  },
-        count(){ 
-                return this.$store.state.Pet.count
-              },
-        curPage(){ 
-                return this.$store.state.Pet.curPage
-            },
-    },
-     data() {
-      return {
-        dialogFormVisible: false,
-        type_btn:0,
-
-      }
-    },
-    methods: {
-       handleSizeChange(val) {
-         console.log(val)
-        this.$store.commit("Pet/sizeChange",val)
-         console.log(`每页 ${val} 条`);
-        this.handeClick_Get()
-      },
-      handleCurrentChange(val) {
-         console.log(val)
-        this.$store.commit("Pet/currentChange",val)
-        this.handeClick_Get()
-        console.log(`当前页: ${val}`);
-      },
-
-      handleEdit(index, row) {
-          this.type_btn = 2
-          this.dialogFormVisible = true
-          this.$store.state.Pet.form = row
-      },    
-      handleDelete(index, row) {
-         this.$store.dispatch('Pet/async_handleDel',row)
-         this.handeClick_Get()
-      },
-      handleAdd(index, row) {
-        // for(var name in this.$store.state.Pet.form) {
-        //       this.$store.state.Pet.form[name] = ""
-        //   }
-        this.dialogFormVisible = true
-        this.type_btn = 1
-      },
-      handeClick_Add(){
-         if(this.type_btn===2){
-             console.log("x")
-            this.$store.dispatch("Pet/async_handleXg")
-            this.handeClick_Get()
-
-         }else{
-             console.log("s")
-            this.$store.dispatch('Pet/async_handleAdd')
-            this.handeClick_Get()
-         }
-         this.dialogFormVisible = false
-      },
-      handeClick_Get(){
-        this.$store.dispatch('Pet/async_handleGet')
-      },
-      handeClick_qx(){
-        this.handeClick_Get()
-        this.dialogFormVisible = false
-      }
+export default {
+  created() {
+    // console.log(localStorage.mendianGliId)
+    // console.log(localStorage.userGlId)
+  
+    console.log(this.chongwuguanli)
+ 
+    this.change_m()
+    this.handeClick_Get();
+  //   if (!this.chongwuguanli[0]) {
+  //     console.log(this.chongwuguanli)
+  //     console.log("inini");
+      this.dialogFormVisible = true;
+  // }
+  },
+  watch:{
+    mendianGliIndex(){
+      this.change_m()
+      this.handeClick_Get();
+      console.log(this.mendianGliIndex)
     }
   }
+  ,
+  computed: {
+    mendianGliIndex(){
+      return this.$store.state.Info.mendianGliIndex
+    },
+    chongwuguanli() {
+      return this.$store.state.Pet.chongwuguanli;
+    },
+    form() {
+      return this.$store.state.Pet.form;
+    },
+    maxPage() {
+      return this.$store.state.Pet.maxPage;
+    },
+    count() {
+      return this.$store.state.Pet.count;
+    },
+    curPage() {
+      return this.$store.state.Pet.curPage;
+    }
+  },
+  data() {
+    return {
+      dialogFormVisible: false,
+      type_btn: 0
+    };
+  },
+  methods: {
+    change_m(){
+        let index = this.mendianGliIndex;
+    if (this.$store.state.Info.mendianGli.length) {
+      console.log("1");
+      const {
+        chongwuguanliId,
+        _id: mendianGliId
+      } = this.$store.state.Info.mendianGli[index];
+        localStorage.mendianGliId = mendianGliId;
+    }
+
+    }
+    ,
+    handleSizeChange(val) {
+      console.log(val);
+      this.$store.commit("Pet/sizeChange", val);
+      console.log(`每页 ${val} 条`);
+      this.handeClick_Get();
+    },
+    handleCurrentChange(val) {
+      console.log(val);
+      this.$store.commit("Pet/currentChange", val);
+      this.handeClick_Get();
+      console.log(`当前页: ${val}`);
+    },
+
+    handleEdit(index, row) {
+      this.type_btn = 2;
+      this.dialogFormVisible = true;
+      this.$store.state.Pet.form = row;
+    },
+    handleDelete(index, row) {
+      this.$store.dispatch("Pet/async_handleDel", row);
+      this.handeClick_Get();
+    },
+    handleAdd(index, row) {
+      // for(var name in this.$store.state.Pet.form) {
+      //       this.$store.state.Pet.form[name] = ""
+      //   }
+      this.dialogFormVisible = true;
+      this.type_btn = 1;
+    },
+    handeClick_Add() {
+      if (this.type_btn === 2) {
+        console.log("x");
+        this.$store.dispatch("Pet/async_handleXg");
+        this.handeClick_Get();
+      } else {
+        console.log("s");
+        this.$store.dispatch("Pet/async_handleAdd");
+        this.handeClick_Get();
+      }
+      this.dialogFormVisible = false;
+    },
+    handeClick_Get() {
+      this.$store.dispatch("Pet/async_handleGet");
+    },
+    handeClick_qx() {
+      this.handeClick_Get();
+      this.dialogFormVisible = false;
+    }
+  }
+};
 </script>
 <style>
-
 </style>

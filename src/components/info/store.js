@@ -4,6 +4,7 @@ export default {
         userName:"",
         mendianGli:[],
         mendianGliIndex:0,
+        mendianNum:0
        },
      mutations:{
        
